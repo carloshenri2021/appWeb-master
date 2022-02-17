@@ -1,7 +1,11 @@
 from sqlalchemy import Column, String, Integer
 from app import Base
+import pymysql
+
 
 class User(Base):
+	con = pymysql.connect(host='localhost', user='root', passwd='6485@Mg81Sp38')
+	cursor = con.cursor()
 	__tablename__ = 'users'
 	id = Column(Integer, primary_key=True)
 	username = Column(String(50), unique=True, nullable=False)

@@ -45,15 +45,9 @@ def acao_cadastro(db, session):
 		hashed = hashed_bytes.decode()
 		new_user = User(username, hashed, salt)
 		db.add(new_user)
-		if session['name'] != username:
-			existe_username = False
-			return template('cadastro', existe_username=False)
-			return redirect('/usuarios')
-	else:
-		existe_username = True
-		return template('cadastro', existe_username=True)
-
-
+		session['name'] = username
+		return redirect('/usuarios')
+	return template('cadastro', existe_username=True)
 
 @app.route('/', method='POST')
 def acao_login(db, session):
